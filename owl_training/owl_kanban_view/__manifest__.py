@@ -1,5 +1,5 @@
 {
-    'name': 'Owl Kanban View',
+    'name': 'Owl Kanban View (sales)',
     'version': '1.0',
     'summary': 'Owl Kanban View',
     'description': """

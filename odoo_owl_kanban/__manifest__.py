@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Odoo OWL JS (Kanban)",
+    'name': "Odoo OWL JS (Kanban - CRM)",
     'summary': "Odoo OWL JS",
     'description': "Odoo OWL JS",
     'author': "Adil Akbar",
