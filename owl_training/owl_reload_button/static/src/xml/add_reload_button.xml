@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="owl_reload_button.reload_button" t-inherit="web.FormView" t-inherit-mode="extension">
-        <xpath expr="//button[@class('btn-outline-primary')]" position="inside">
-            <button class='btn opacity-trigger-hover' type='button'
-                t-on-click='onReloadButtonClicked'>Reload</button>
+        <xpath expr="//button[contains(@class, 'btn-outline-primary')]" position="after">
+            <t t-if="props.resModel === 'sale.order'">
+                <button class="btn btn-outline-primary mx-1" type="button"
+                    t-on-click="onReloadButtonClicked">Reload
+                </button>
+            </t>
         </xpath>
     </t>
 </templates>

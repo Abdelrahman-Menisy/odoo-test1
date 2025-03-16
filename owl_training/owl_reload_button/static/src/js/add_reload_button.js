@@ -1,8 +1,9 @@
 /** @odoo-module */
 
-import { formController } from '@web/views/from/form_controller';
+import { FormController } from '@web/views/form/form_controller';
 import { patch } from '@web/core/utils/patch';
 import { useService } from '@web/core/utils/hooks';
+
 
 
 const formControllerReloadButton = {
@@ -19,4 +20,4 @@ const formControllerReloadButton = {
 
 }
 
-patch(formController.prototype, formControllerReloadButton);
+patch(FormController.prototype, formControllerReloadButton);
