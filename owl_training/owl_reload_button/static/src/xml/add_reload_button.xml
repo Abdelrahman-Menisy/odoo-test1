@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl_reload_button.reload_button" t-inherit="web.FormView" t-inherit-mode="extension">
+        <xpath expr="//button[@class('btn-outline-primary')]" position="inside">
+            <button class='btn opacity-trigger-hover' type='button'
+                t-on-click='onReloadButtonClicked'>Reload</button>
+        </xpath>
+    </t>
+</templates>
