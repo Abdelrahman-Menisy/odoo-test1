@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id,perm_read,perm_write,perm_create,perm_unlink
+real_state,Real State,model_real_state,,1,1,1,1
+real_state_project,Real State project,model_real_state_project,,1,1,1,1
+real_state_units,Real State units,model_real_state_units,,1,1,1,1
+access_real_state_order_lines,access_real_state_order_lines,model_real_state_order_lines,,1,1,1,1
+access_real_state_invoice_order_lines,access_real_state_invoice_order_lines,model_real_state_invoice_order_lines,,1,1,1,1
+

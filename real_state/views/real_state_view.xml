@@ -1,0 +1,283 @@
+<odoo>
+    <data>
+        <!-- Action for Real State Orders -->
+        <record id="real_state_orders_action" model="ir.actions.act_window">
+            <field name="name">Real State Orders</field>
+            <field name="res_model">real.state</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Action for Real State Projects -->
+        <record id="real_state_project_action" model="ir.actions.act_window">
+            <field name="name">Real State Projects</field>
+            <field name="res_model">real.state.project</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Action for Real State Units -->
+        <record id="real_state_units_action" model="ir.actions.act_window">
+            <field name="name">Real State Units</field>
+            <field name="res_model">real.state.units</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Views Definitions -->
+        <record id="real_state_orders_form_view" model="ir.ui.view">
+            <field name="name">real.state.orders.form</field>
+            <field name="model">real.state</field>
+            <field name="arch" type="xml">
+                <form string="Real State Orders">
+                    <header>
+                        <field name="order_status" widget="statusbar"
+                            options="{'clickable':1}" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" string="Customer" placeholder="Select a Customer" />
+                            </h2>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="created_date" />
+                            </group>
+                            <group>
+                                <field name="offer_start_date" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Property Lines">
+                                <field name="order_ids">
+                                    <tree editable="bottom" create="true" delete="true">
+                                        <field name="project_ids"
+                                            options="{'no_create': True,'no_create_edit' : True}" />
+                                        <field name="units_ids"
+                                            options="{'no_create': True,'no_create_edit' : True}" />
+                                        <field name="unit_price" />
+                                        <field name="tax_percentage" />
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="amount_untaxed" widget="monetary" />
+                                    <field name="amount_tax" widget="monetary" />
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="total_price" />
+                                    </div>
+                                    <field name="total_price" nolabel="1"
+                                        class="oe_subtotal_footer_separator" widget="monetary" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="message_ids" />
+                        <field name="activity_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="real_state_orders_list_view" model="ir.ui.view">
+            <field name="name">real.state.orders.list</field>
+            <field name="model">real.state</field>
+            <field name="arch" type="xml">
+                <tree string="Real State Orders">
+                    <field name="name" />
+                    <field name="created_date" />
+                    <field name="offer_start_date" />
+                    <field name="amount_untaxed" sum="Untaxed Total" />
+                    <field name="amount_tax" sum="Tax Total" />
+                    <field name="total_price" sum="Total Price" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="real_state_project_form_view" model="ir.ui.view">
+            <field name="name">real.state.project.form</field>
+            <field name="model">real.state.project</field>
+            <field name="arch" type="xml">
+                <form string="Real State Project">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(real_state_units_action)d" type="action"
+                                context="{'default_project_id': active_id, 'search_default_project_id': active_id}"
+                                class="oe_stat_button" icon="fa-building">
+                                <field name="total_units" string="Units" widget="statinfo" />
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Project Name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date" />
+                                <field name="location" />
+                            </group>
+                            <group>
+                                <field name="total_blocks" />
+                                <field name="available_units_count" />
+                                <field name="sold_units_count" />
+                                <field name="default_unit_price" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Units">
+                                <field name="unit_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="block" />
+                                        <field name="unit_number" />
+                                        <field name="unit_type" />
+                                        <field name="unit_status" />
+                                        <field name="unit_price" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="message_ids" />
+                        <field name="activity_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="real_state_project_list_view" model="ir.ui.view">
+            <field name="name">real.state.project.list</field>
+            <field name="model">real.state.project</field>
+            <field name="arch" type="xml">
+                <tree string="Real State Projects">
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="location" />
+                    <field name="total_blocks" />
+                    <field name="total_units" />
+                    <field name="available_units_count" />
+                    <field name="sold_units_count" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="real_state_units_form_view" model="ir.ui.view">
+            <field name="name">real.state.units.form</field>
+            <field name="model">real.state.units</field>
+            <field name="arch" type="xml">
+                <form string="Real State Units">
+                    <header>
+                        <field name="unit_status" widget="statusbar"
+                            options="{'clickable':1}" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="ref" />
+                            </h2>
+
+                            <h3>
+                                <field name="name" placeholder="Unit Name" />
+                            </h3>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name="project_id" />
+                                <field name="block" />
+                                <field name="floor" />
+                            </group>
+                            <group>
+                                <field name="unit_number" />
+                                <field name="unit_area" />
+                                <field name="unit_type" />
+                                <field name="unit_price" widget="monetary" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="message_ids" />
+                        <field name="activity_ids" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="real_state_units_list_view" model="ir.ui.view">
+            <field name="name">real.state.units.list</field>
+            <field name="model">real.state.units</field>
+            <field name="arch" type="xml">
+                <tree string="Real State Units" decoration-success="unit_status=='available'"
+                    decoration-warning="unit_status=='reserved'"
+                    decoration-danger="unit_status=='sold'">
+                    <field name="name" />
+                    <field name="project_id" />
+                    <field name="block" />
+                    <field name="unit_number" />
+                    <field name="floor" />
+                    <field name="unit_area" sum="Total Area" />
+                    <field name="unit_type" />
+                    <field name="unit_status" />
+                    <field name="unit_price" sum="Total Price" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search Views -->
+        <record id="real_state_units_search_view" model="ir.ui.view">
+            <field name="name">real.state.units.search</field>
+            <field name="model">real.state.units</field>
+            <field name="arch" type="xml">
+                <search string="Units">
+                    <field name="name" />
+                    <field name="project_id" />
+                    <field name="block" />
+                    <field name="unit_number" />
+                    <separator />
+                    <filter string="Available" name="available"
+                        domain="[('unit_status', '=', 'available')]" />
+                    <filter string="Reserved" name="reserved"
+                        domain="[('unit_status', '=', 'reserved')]" />
+                    <filter string="Sold" name="sold" domain="[('unit_status', '=', 'sold')]" />
+                    <filter string="Rented" name="rented" domain="[('unit_status', '=', 'rented')]" />
+                    <group expand="0" string="Group By">
+                        <filter string="Project" name="project_id"
+                            context="{'group_by': 'project_id'}" />
+                        <filter string="Block" name="block" context="{'group_by': 'block'}" />
+                        <filter string="Status" name="unit_status"
+                            context="{'group_by': 'unit_status'}" />
+                        <filter string="Type" name="unit_type" context="{'group_by': 'unit_type'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="real_state_project_search_view" model="ir.ui.view">
+            <field name="name">real.state.project.search</field>
+            <field name="model">real.state.project</field>
+            <field name="arch" type="xml">
+                <search string="Projects">
+                    <field name="name" />
+                    <field name="location" />
+                    <group expand="0" string="Group By">
+                        <filter string="Location" name="location" context="{'group_by': 'location'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="real_state_menu" name="Real State"
+            web_icon="real_state,static/description/icon.png" sequence="10" />
+        <menuitem id="real_state_orders_menu" name="Orders" parent="real_state_menu"
+            action="real_state_orders_action" sequence="1" />
+        <menuitem id="real_state_projects_main_menu" name="Projects" parent="real_state_menu"
+            sequence="2" />
+        <menuitem id="real_state_project_menu" name="Project" parent="real_state_projects_main_menu"
+            action="real_state_project_action" />
+        <menuitem id="real_state_units_menu" name="Units" parent="real_state_projects_main_menu"
+            action="real_state_units_action" />
+    </data>
+</odoo>

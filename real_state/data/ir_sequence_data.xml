@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+        <record id="sequence_real_state_units" model="ir.sequence">
+            <field name="name">Real State Units Sequence</field>
+            <field name="code">real.state.units</field>
+            <field name="prefix">UNIT/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+    </data>
+</odoo>
