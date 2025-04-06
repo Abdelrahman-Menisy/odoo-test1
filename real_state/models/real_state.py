@@ -107,6 +107,26 @@ class RealState(models.Model):
                 _logger.error(f"Error processing invoice for record {record.id}: {str(e)}")
                 _logger.error(traceback.format_exc())  # Logs the full traceback for debugging
 
+    def get_Invoices(self):
+        # Get selected Real State record IDs from context
+        selected_ids = self.env.context.get('active_ids', [])
+        invoices = self.env['account.move'].search([
+            ('real_state_id', 'in', selected_ids),
+            ('is_real_state', '=', True),
+            ('state', '!=', 'cancel'),
+        ])
+
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': _('Invoices'),
+            'res_model': 'account.move',
+            'view_mode': 'tree,form',
+            'domain': [('id', 'in', invoices.ids)],
+            'context': dict(self.env.context),
+        }
+        return action
+
+
 
 
 class OrderLine(models.Model):
@@ -160,3 +180,4 @@ class OrderLine(models.Model):
     def _onchange_units(self):
         if self.units_ids:
             self.unit_price = self.units_ids.unit_price
+

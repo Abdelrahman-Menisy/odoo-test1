@@ -5,6 +5,8 @@
         Real State app 
     """,
     "version": "1.0",
+    "company": "tecfy",
+    "website": "https://www.tecfy.co",
     "author": "Menisy",
     "category": "Real State",
     "depends": ["base", 'contacts', 'account'],
@@ -18,6 +20,4 @@
     "auto_install": False,
     "sequence": 1,
     "license":"LGPL-3",
-    "company": "tecfy",
-    "website": "https://www.tecfy.co",
 }

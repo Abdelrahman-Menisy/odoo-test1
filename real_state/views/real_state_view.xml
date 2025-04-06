@@ -268,6 +268,17 @@
             </field>
         </record>
 
+        <record id="action_get_real_state_invoices" model="ir.actions.server">
+            <field name="name">View Related Invoices</field>
+            <field name="model_id" ref="model_real_state" />
+            <field name="binding_model_id" ref="model_real_state" />
+            <field name="state">code</field>
+            <field name="code">
+                action = env['real.state'].browse(env.context.get('active_ids')).get_Invoices()
+            </field>
+        </record>
+
+
         <!-- Menu Items -->
         <menuitem id="real_state_menu" name="Real State"
             web_icon="real_state,static/description/icon.png" sequence="10" />
